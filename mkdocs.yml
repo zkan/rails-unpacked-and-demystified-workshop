@@ -33,3 +33,4 @@ plugins:
 nav:
   - Home: index.md
   - Setting up Your Development Environment: setting-up-your-development-environment.md 
+  - Ruby Basics (+ Minitest): ruby-basics.md
