@@ -9,11 +9,12 @@ Basics](https://zkan.github.io/neovim-zellij-workshop/vim-basics/){target=_blank
 
 ## mise-en-place
 
-เราจะมาใช้เครื่องมือตัวหนึ่งที่ชื่อว่า mise-en-place(https://mise.jdx.dev/){target=_blank}
-(อ่านออกเสียงว่า "MEEZ ahn plahs") เป็นเครื่องมือที่เราสามารถใช้จัดการเวอร์ชั่นของภาษาต่าง ๆ
-เหมือนกับที่เราใช้ nvm เพื่อจัดการเวอร์ชั่นของ Node ใช้ pyenv เพื่อจัดการเวอร์ชั่นของ Python หรือ
-rbenv เพื่อจัดการเวอร์ชั่นของ Ruby แล้วก็ก็สามารถใช้ mise จัดการพวก Environment Varibles
-หรือทำ automated tasks ต่าง ๆ ได้ด้วย บอกได้ว่าลง mise ตัวเดียว จัดการครบทุกอย่างที่ต้องการ
+เราจะมาใช้เครื่องมือตัวหนึ่งที่ชื่อว่า
+[mise-en-place](https://mise.jdx.dev/){target=_blank} (อ่านออกเสียงว่า "MEEZ ahn
+plahs") เป็นเครื่องมือที่เราสามารถใช้จัดการเวอร์ชั่นของภาษาต่าง ๆ เหมือนกับที่เราใช้ nvm
+เพื่อจัดการเวอร์ชั่นของ Node ใช้ pyenv เพื่อจัดการเวอร์ชั่นของ Python หรือ rbenv
+เพื่อจัดการเวอร์ชั่นของ Ruby แล้วก็ก็สามารถใช้ mise จัดการพวก Environment Varibles หรือทำ
+automated tasks ต่าง ๆ ได้ด้วย บอกได้ว่าลง mise ตัวเดียว จัดการครบทุกอย่างที่ต้องการ
 ในเวิร์คชอปเราก็จะใช้ mise นี่แหละเป็นเครื่องมือในการจัดการเวอร์ชั่น Ruby ของเรา
 
 ### Getting Started
