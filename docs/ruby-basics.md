@@ -497,3 +497,118 @@ class TestComputerCompany < Minitest::Test
   end
 end
 ```
+
+### interactive Ruby (IRB)
+
+IRB ⇒ Interactive RuBy (REPL)
+
+https://github.com/ruby/irb
+
+IRB stands for "interactive Ruby" and is a tool to interactively execute Ruby expressions read from the standard input.
+
+The irb command from your shell will start the interpreter.
+
+```bash
+irb
+```
+
+```ruby
+➜  ~ irb
+irb(main):001:0> "Hello"
+=> "Hello"
+irb(main):002:0> 4+3
+=> 7
+irb(main):003:0> "Hello".length()
+=> 5
+```
+
+See what methods are available to `"Hello"`
+
+```ruby
+> "Hello".methods()
+```
+
+Symbols ⇒ A `Symbol` is kind of like a `String`
+
+```ruby
+irb(main):007:0> :watermelon.length()
+=> 10
+irb(main):008:0> :peach_pie.upcase()
+=> :PEACH_PIE
+```
+
+The main difference between a `String` and a `Symbol` is that a symbol is immutable. It can't be changed.
+
+```ruby
+irb(main):010:0> :kan.object_id
+=> 2970908
+irb(main):011:0> :kan.object_id
+=> 2970908
+irb(main):012:0> :kan.object_id
+=> 2970908
+irb(main):013:0> :kan.object_id
+=> 2970908
+irb(main):014:0> "kan".object_id
+=> 460
+irb(main):015:0> "kan".object_id
+=> 480
+irb(main):016:0> "kan".object_id
+=> 500
+irb(main):017:0> "kan".object_id
+=> 520
+irb(main):018:0> "kan".object_id
+=> 540
+```
+
+You should use symbols as **names** or labels for things (like methods) & use [strings](https://www.rubyguides.com/2018/01/ruby-string-methods/) when you care more about the **data** (individual characters).
+
+Loop
+
+```ruby
+numbers = (1..10)
+sum = 0
+numbers.each() do |number|
+  sum = sum + (number)
+end
+```
+
+Source Code Layout
+
+Use 2 spaces per indentation level
+
+```ruby
+# bad - four spaces
+    def some_method
+end
+
+# bad - indentation levels don't line up
+  def some_method
+end
+
+#good - two spaces
+def some_method
+  # Write code here.
+end
+```
+
+Use `snake_case` for symbols, methods, variables, files and folders. `snake_case` means using all lowercase words, separated with an underscore.
+
+A **gem** is a package of Ruby code we can use in our Ruby programs or run from the command line. We’ll be using many gems throughout Ruby and Rails.
+
+We’ll manage the gems in our projects using a gem called Bundler. We can install Bundler in our local environment by running `gem install bundler` in the terminal.
+
+All of your Ruby projects should **always** include a `Gemfile` with all required gems.
+
+### Bundler
+
+Bundler: The best way to manage a Ruby application’s gems
+
+https://bundler.io/
+
+It’s a package manager for Ruby.
+
+Run the following command to generate a Gemfile with the default [rubygems.org](http://rubygems.org/) source
+
+```bash
+bundle init
+```
