@@ -34,3 +34,4 @@ nav:
   - Home: index.md
   - Setting up Your Development Environment: setting-up-your-development-environment.md 
   - Ruby Basics (+ Minitest): ruby-basics.md
+  - Setting up a Ruby on Rails Project: setting-up-a-ruby-on-rails-project.md
