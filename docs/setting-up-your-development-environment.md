@@ -40,7 +40,8 @@ mise use -g ruby@3.4.7
 ```
 
 โดยที่ `-g` คือการติดตั้งแบบ Global Default ซึ่ง mise จะเก็บ Configuration ไว้ที่ไฟล์
-`~/.config/mise/config.toml`
+`~/.config/mise/config.toml` ถ้าไม่ได้ใส่ `-g` mise จะเก็บ Configuration ไว้ที่ไฟล์
+`mise.toml` ไว้ที่ Directory นั้น ๆ ที่รันคำสั่ง
 
 พอติดตั้งเสร็จ เราสามารถใช้คำสั่งด้านล่างนี้เพื่อดูว่าเราได้ติดตั้งเครื่องมืออะไรไปแล้วบ้าง
 
