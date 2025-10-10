@@ -10,4 +10,4 @@
 1. Authentication (Default)
 1. Hotwire Basics
 1. Solid Cable, Solid Cache and Solid Queue
-1. etc.
+1. Deployment

@@ -35,3 +35,10 @@ nav:
   - Setting up Your Development Environment: setting-up-your-development-environment.md 
   - Ruby Basics (+ Minitest): ruby-basics.md
   - Setting up a Ruby on Rails Project: setting-up-a-ruby-on-rails-project.md
+  - Models, Views, and Controllers (+ Minitest): models-views-and-controllers.md
+  - Forms: forms.md
+  - Authentication (Default): authentication.md
+  - Hotwire Basics: hotwire.md
+  - Solid Cable, Solid Cache and Solid Queue: solid-cable-solid-cache-and-solid-queue.md
+  - Deployment: deployment.md
+  
