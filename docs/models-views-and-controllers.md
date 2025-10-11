@@ -249,6 +249,20 @@ end
 resources :projects
 ```
 
+### Migrations
+
+```bash
+rails g migration AddCompletedAndPriorityToTodoes completed:boolean priority:integer
+```
+
+```bash
+rails g migration AddActiveToProjects active:boolean
+```
+
+```bash
+rails db:migrate
+```
+
 ## MVC Pattern
 
 Controller
