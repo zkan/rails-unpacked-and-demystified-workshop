@@ -1,30 +1,40 @@
 # Ruby Basics (+ Minitest)
 
+เราสามารถทำเวิร์คชอปนี้ได้ 2 วิธีคือ
+
+1. ใช้ [Interactive Ruby (IRB)](https://github.com/ruby/irb){target=_blank} โดยการรัน
+
+    ```bash
+    irb
+    ```
+
+1. สร้างไฟล์สคริป `main.rb` แล้วรันสคริปด้วยคำสั่ง
+
+    ```bash
+    ruby main.rb
+    ```
+
 ## Basics
 
 ### Variables
 
-ทดสอบ
-
-```bash
-ruby hello.rb
-```
-
 ```ruby
 name = "John"
 
-# Global variable
-$redis_conn = Redis.new
+# Global Variable
+$redis_conn = "This is Redis conn"
 
-# Class variable - ซึ่งจะไม่ค่อยได้ใช้ ไม่แนะนำให้ใช้จาก style guide ต่าง ๆ
+# Class Variable - ซึ่งจะไม่ค่อยได้ใช้ ไม่แนะนำให้ใช้จาก Style Guide ต่าง ๆ
 @@count = 1
 
-# Instance variable - ตัวแปรที่อยู่ใน instance ของ class
+# Instance Variable - ตัวแปรที่อยู่ใน Instance ของ Class
 @name = "Kan"
 
-# local, block
+# Local หรือใช้ใน Block
 country = "Thailand"
 ```
+
+#### Data Types
 
 ```ruby
 i = 5
@@ -35,23 +45,16 @@ f = 5.0
 
 (5 + 5.0).round
 
-# Big Decimal
-# BigDecimal("0.0001")
-
 # Rational Number - จำนวนตรรกยะ เช่น 1/2
 r = 5/8r
-
 5/8r + 3/8r
 
 n = 3
 n = n + 5
 n += 1
-```
 
-```ruby
 name = 'John'
-name2 = "John" # Prefer double quotes - ตอนนี้ performance ไม่ต่างกับ single quote แล้ว
-
+name2 = "John" # Prefer Double Quotes - ตอนนี้ Performance ไม่ต่างกับ Single Quote แล้ว
 
 # Concatenation
 c = "a" + "b"
@@ -63,9 +66,12 @@ first = name[0]
 last = name[-1]
 before_last = name[-2]
 
-# Symbol - ใช้ในกรณีที่เป็น key ซึ่งจริง ๆ จะ interchangable กับ string ซึ่ง symbol จะใช้ memory น้อยกว่า
+# Symbol - ใช้ในกรณีที่เป็น key ซึ่งจริง ๆ จะ Interchangable กับ String และ Symbol จะใช้ Memory น้อยกว่า
+
 another_name = :Kan
 category = [:fruit, :vegetable]
+
+# You should use symbols as **names** or labels for things (like methods) & use [strings](https://www.rubyguides.com/2018/01/ruby-string-methods/) when you care more about the **data** (individual characters).
 
 # strip
 "Kan\n".strip
@@ -74,7 +80,7 @@ category = [:fruit, :vegetable]
 # .include?
 
 # .match
-name.match(/j/) # => ได้ object MatchData ถ้าอยากได้ string เราจะสั่ง .to_s อีกที
+name.match(/j/) # => ได้ Object MatchData ถ้าอยากได้ String เราจะสั่ง .to_s อีกที
 
 # .gsub
 name.gsub(/j/, "")
@@ -97,7 +103,7 @@ SELECT * FROM `users` WHERE name = '#{name}'
 SQL
 ```
 
-### Array
+### Array, Set
 
 ```ruby
 arr = []
@@ -138,29 +144,36 @@ numbers.to_a # To array
 numbers.include?(1)
 ```
 
+#### Loop
+
 ```ruby
+(0..5).to_a
+
+for i in 0..5
+  puts i
+end
+
+numbers = (1..10)
+sum = 0
+numbers.each() do |number|
+  sum = sum + (number)
+end
+
+while true
+  break
+  next
+end
+
 # Enumerable
 # การนับทีละ 1
 
 arr = [1, 2, 3, 4]
-h = {
-  name: "John",
-  age: 18
-}
 
 # .each
-
 arr.each { |i| puts i }
 
 arr.each do |i|
   puts i
-end
-
-h.each { |k, v| puts k; puts v }
-
-h.each do |k, v|
-  puts k
-  puts v
 end
 
 # map
@@ -180,7 +193,7 @@ arr.map { |i| i * 2 }
 # split
 "John, Jack".split(", ").map { |name| { name: name } }
 
-"John, Jack".split(", ").map(&:strip)
+"John, Jack".split(",").map(&:strip)
 
 [1, 2, 3, nil].all? { |i| !i.nil? }
 ```
@@ -198,6 +211,18 @@ h.values
 
 h.key? :name
 h.key? :age
+
+h = {
+  name: "John",
+  age: 18
+}
+
+h.each { |k, v| puts k; puts v }
+
+h.each do |k, v|
+  puts k
+  puts v
+end
 ```
 
 ### Struct
@@ -235,19 +260,6 @@ when n < 5
   puts n
 else
   puts "blank"
-end
-
-
-# Loop
-(0..5).to_a
-
-for i in 0..5
-  puts i
-end
-
-while true
-  break
-  next
 end
 
 # Falsy
@@ -338,17 +350,17 @@ class Person
   # เป็น shorthand แทนที่เราจะประกาศ method ด้านล่าง
   #attr_reader :name
 
-  #def name
-  #  @name
-  #end
+  # def name
+  #   @name
+  # end
 
   # เป็น shorthand แทนที่เราจะประกาศ method ด้านล่าง
   #attr_writer :name
 
   # ทำให้เรา assign ค่าให้ name ได้
-  #def name=(value)
-  #  @name = value
-  #end
+  # def name=(value)
+  #   @name = value
+  # end
 
   # เป็นทั้ง reader และ writer
   attr_accessor :name
@@ -406,7 +418,10 @@ john.name = "John"
 john.hello "Kan"
 ```
 
+แยกไฟล์
+
 ```ruby
+# greetable.rb
 module Greetable
   attr_accessor :name
 
@@ -417,7 +432,7 @@ end
 ```
 
 ```ruby
-#require "greetable"
+# computer_company.rb
 require_relative "./greetable"
 
 module ComputerCompany
@@ -429,11 +444,14 @@ end
 
 ## Testing with Minitest
 
+เราจะติดตั้ง Minitest ก่อน ซึ่ง Minitest จะเป็น Gem ซึ่งก็คือ Package ของ Ruby Code ที่เราสามารถติดตั้งเพิ่มเข้ามาได้ โดยใช้คำสั่ง
+
 ```bash
-gem install minitest
+mise exec ruby -- gem install minitest
 ```
 
 ```ruby
+# fizzbuzz_test.rb
 require "minitest/autorun"
 require_relative "../fizzbuzz"
 
@@ -446,16 +464,21 @@ end
 ```
 
 ```ruby
+# fizzbuzz.rb
 def fizzbuzz(number)
   "Fizz"
 end
 ```
 
+แยก Minitest ออกมาเป็น Helper
+
 ```ruby
+# test_helper.rb
 require "minitest/autorun"
 ```
 
 ```ruby
+# greetable_test.rb
 require_relative "./test_helper"
 require_relative "./greetable"
 
@@ -474,7 +497,7 @@ end
 ```
 
 ```ruby
-# minitest - เป็น PORO - อยู่ใน core ของ Ruby เลย
+# Minitest - เป็น Plain Old Ruby Object (PORO) - อยู่ใน core ของ Ruby เลย
 # assert_equal @name, "John"
 #
 # rspec - มีคนใช้เยอะกว่า จะเป็น DSL ของตัวเอง
@@ -496,119 +519,4 @@ class TestComputerCompany < Minitest::Test
   def teardown
   end
 end
-```
-
-### interactive Ruby (IRB)
-
-IRB ⇒ Interactive RuBy (REPL)
-
-https://github.com/ruby/irb
-
-IRB stands for "interactive Ruby" and is a tool to interactively execute Ruby expressions read from the standard input.
-
-The irb command from your shell will start the interpreter.
-
-```bash
-irb
-```
-
-```ruby
-➜  ~ irb
-irb(main):001:0> "Hello"
-=> "Hello"
-irb(main):002:0> 4+3
-=> 7
-irb(main):003:0> "Hello".length()
-=> 5
-```
-
-See what methods are available to `"Hello"`
-
-```ruby
-> "Hello".methods()
-```
-
-Symbols ⇒ A `Symbol` is kind of like a `String`
-
-```ruby
-irb(main):007:0> :watermelon.length()
-=> 10
-irb(main):008:0> :peach_pie.upcase()
-=> :PEACH_PIE
-```
-
-The main difference between a `String` and a `Symbol` is that a symbol is immutable. It can't be changed.
-
-```ruby
-irb(main):010:0> :kan.object_id
-=> 2970908
-irb(main):011:0> :kan.object_id
-=> 2970908
-irb(main):012:0> :kan.object_id
-=> 2970908
-irb(main):013:0> :kan.object_id
-=> 2970908
-irb(main):014:0> "kan".object_id
-=> 460
-irb(main):015:0> "kan".object_id
-=> 480
-irb(main):016:0> "kan".object_id
-=> 500
-irb(main):017:0> "kan".object_id
-=> 520
-irb(main):018:0> "kan".object_id
-=> 540
-```
-
-You should use symbols as **names** or labels for things (like methods) & use [strings](https://www.rubyguides.com/2018/01/ruby-string-methods/) when you care more about the **data** (individual characters).
-
-Loop
-
-```ruby
-numbers = (1..10)
-sum = 0
-numbers.each() do |number|
-  sum = sum + (number)
-end
-```
-
-Source Code Layout
-
-Use 2 spaces per indentation level
-
-```ruby
-# bad - four spaces
-    def some_method
-end
-
-# bad - indentation levels don't line up
-  def some_method
-end
-
-#good - two spaces
-def some_method
-  # Write code here.
-end
-```
-
-Use `snake_case` for symbols, methods, variables, files and folders. `snake_case` means using all lowercase words, separated with an underscore.
-
-A **gem** is a package of Ruby code we can use in our Ruby programs or run from the command line. We’ll be using many gems throughout Ruby and Rails.
-
-We’ll manage the gems in our projects using a gem called Bundler. We can install Bundler in our local environment by running `gem install bundler` in the terminal.
-
-All of your Ruby projects should **always** include a `Gemfile` with all required gems.
-
-### Bundler
-
-Bundler: The best way to manage a Ruby application’s gems
-
-https://bundler.io/
-
-It’s a package manager for Ruby.
-
-Run the following command to generate a Gemfile with the default [rubygems.org](http://rubygems.org/) source
-
-```bash
-bundle init
 ```
