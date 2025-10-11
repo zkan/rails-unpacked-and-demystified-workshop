@@ -21,3 +21,23 @@ client.
 - Reduce your development time by using Hotwire’s cohesive set of
 tools to avoid learning and integrating multiple third-party libraries.
 - It offers CSRF and XSS attack prevention by default, which will give you more security.
+
+## Turbo Frames
+
+```erb
+<%# app/views/todos/show.html.erb %>
+<%= turbo_frame_tag @todo do %>
+  <p><%= @todo.description %></p>
+
+  <%= link_to "Edit this todo", edit_todo_path(@todo) %>
+<% end %>
+
+<%# app/views/todos/edit.html.erb %>
+<%= turbo_frame_tag @todo do %>
+  <%= render "form" %>
+
+  <%= link_to "Cancel", todo_path(@todo) %>
+<% end %>
+```
+
+ตอนที่กดปุ่ม "Edit this todo" แล้ว turbo frame จะเอาของที่อยู่ใน `edit.html.erb` มาแทนที่
