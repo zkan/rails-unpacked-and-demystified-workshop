@@ -3,6 +3,11 @@
 
 ## Real-time Messaging with Solid Cable
 
+แก้ `config/database.yml` เพิ่ม `cable` ไปใน `development` (ถ้าใช้บน Production ก็เพิ่มใน `production`)
+
+แล้วก็ไปแก้ `config/cable.yml` เพื่อไปบอกว่า Database ไหนที่เราจะใช้ ให้เปลี่ยนจาก Adapter ที่เป็น `async` เป็น `solid_cable` (เอาของ Production มาใช้ได้) ตรงค่าของ `writing` ก็ให้ตั้งชื่อให้ตรงกับที่เราเซตไว้ที่ไฟล์ `config/database.yml` ซึ่งในที่นี้คือ `cable`
+
+เราจะไปเพิ่ม `<%= turbo_stream_from @something, "channel_name" %>` ตรงที่เราอยากจะรอ Event
 
 ## Caching with Solid Cache
 
