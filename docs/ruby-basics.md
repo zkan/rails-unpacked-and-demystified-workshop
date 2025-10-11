@@ -34,7 +34,7 @@ $redis_conn = "This is Redis conn"
 country = "Thailand"
 ```
 
-#### Data Types
+**Data Types**
 
 ```ruby
 i = 5
@@ -103,7 +103,7 @@ SELECT * FROM `users` WHERE name = '#{name}'
 SQL
 ```
 
-### Array, Set
+### Array and Set
 
 ```ruby
 arr = []
@@ -142,60 +142,6 @@ numbers << 2
 numbers.to_a # To array
 # Check if item is included?
 numbers.include?(1)
-```
-
-#### Loop
-
-```ruby
-(0..5).to_a
-
-for i in 0..5
-  puts i
-end
-
-numbers = (1..10)
-sum = 0
-numbers.each() do |number|
-  sum = sum + (number)
-end
-
-while true
-  break
-  next
-end
-
-# Enumerable
-# การนับทีละ 1
-
-arr = [1, 2, 3, 4]
-
-# .each
-arr.each { |i| puts i }
-
-arr.each do |i|
-  puts i
-end
-
-# map
-arr.map { |i| i * 2 }
-
-arr.map do |k, v|
-  { k => v}
-end.reduce(&:merge)
-
-# reduce
-arr.map { |i| i * 2 }
-   .reduce(0) { |sum, i| sum + i }
-
-arr.map { |i| i * 2 }
-   .reduce { |sum, i| sum + i }
-
-# split
-"John, Jack".split(", ").map { |name| { name: name } }
-
-"John, Jack".split(",").map(&:strip)
-
-[1, 2, 3, nil].all? { |i| !i.nil? }
 ```
 
 ### Hash
@@ -264,6 +210,60 @@ end
 
 # Falsy
 # nil, false
+```
+
+### Loop
+
+```ruby
+(0..5).to_a
+
+for i in 0..5
+  puts i
+end
+
+numbers = (1..10)
+sum = 0
+numbers.each() do |number|
+  sum = sum + (number)
+end
+
+while true
+  break
+  next
+end
+
+# Enumerable
+# การนับทีละ 1
+
+arr = [1, 2, 3, 4]
+
+# .each
+arr.each { |i| puts i }
+
+arr.each do |i|
+  puts i
+end
+
+# map
+arr.map { |i| i * 2 }
+
+arr.map do |k, v|
+  { k => v}
+end.reduce(&:merge)
+
+# reduce
+arr.map { |i| i * 2 }
+   .reduce(0) { |sum, i| sum + i }
+
+arr.map { |i| i * 2 }
+   .reduce { |sum, i| sum + i }
+
+# split
+"John, Jack".split(", ").map { |name| { name: name } }
+
+"John, Jack".split(",").map(&:strip)
+
+[1, 2, 3, nil].all? { |i| !i.nil? }
 ```
 
 ### Method
