@@ -1,5 +1,86 @@
 # Models, Views, and Controllers (+ Minitest)
 
+เพิ่มโค้ดนี้ใน `config/routes.rb`
+
+```ruby
+get "/projects", to: "projects#index"
+```
+
+เราจะให้ลิ้งค์ไปที่ Action ที่ชื่อ `index`
+
+```bash
+rails g controller Projects
+```
+
+```ruby
+class ProjectController < ApplicationController
+  def index
+    @projects = Project.all
+  end
+end
+```
+
+```bash
+rails g model Project name:string
+```
+
+```bash
+rails db:migrate
+```
+
+```ruby
+class Project < ApplicationRecord
+end
+```
+
+พวก Method ต่าง ๆ จะอยู่ใน `ApplicationRecord` อยู่แล้ว
+
+สร้างไฟล์ `app/views/project/index.html.erb`
+
+```erb
+<h1>Projects</h1>
+
+<ul>
+  <% @projects.each do |project| %>
+    <li><%= project.name %></li>
+  <% end %>
+</ul>
+```
+
+ลองเพิ่มข้อมูลใน Rails Console
+
+```ruby
+Project.create(name: "Plan a Vacation")
+Project.create(name: "House Repairs")
+```
+
+ถ้าเราอยากจะดูข้อมูลแต่ละข้อมูลแบบ Dynamic เพิ่ม `config/routes.rb`
+
+```rb
+get "/projects/:id", to: "projects#show", as: "project"
+```
+
+เราจะได้ `params` เข้ามาใน Action ที่ชื่อ `show` ให้เราเพิ่มโค้ดตามนี้
+
+```ruby
+def show
+  @project = Project.find(params[:id])
+end
+```
+
+ให้เพิ่มไฟล์ `show.html.erb`
+
+```erb
+<h1><%= @project.name %></h1>
+<p>Project details coming soon ...</p>
+```
+
+ทำลิ้งค์ที่หน้า Index เราสามารถใช้ `link_to` ได้ ให้แก้โค้ดให้เป็นตามนี้
+
+```erb
+<%= link_to project.name, project_path(project) %>
+```
+
 ## MVC Pattern
 
 Controller
