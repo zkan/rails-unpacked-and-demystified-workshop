@@ -388,7 +388,81 @@ rails routes
 
 ### Associations
 
-เชื่อมระหว่าง 2 tabls (user กับ friend) เพื่อให้เราสามารถแยกเพื่อนของแต่ละ user ได้
+Todos <> Projects
+
+```bash
+rails g migration AddProjectIdToTodos project:references
+```
+
+```bash
+rails db:drop db:create db:migrate
+```
+
+```ruby
+class Todo < ApplicationRecord
+  belongs_to :project
+end
+```
+
+```ruby
+class Project < ApplicationRecord
+  has_many :todos, dependent: :destroy
+  validates :name, presence: true
+end
+```
+
+เพิ่มฟิลด์ในไฟล์ `app/views/todos/_form.html.erb`
+
+```erb
+<div>
+  <%= form.label :completed, style: "display: block" %>
+  <%= form.check_box :completed %>
+</div>
+
+<div>
+  <%= form.label :priority, style: "display: block" %>
+  <%= form.number_field :priority %>
+</div>
+
+<div>
+  <%= form.label :project_id, style: "display: block" %>
+  <%= form.collection_select :project_id, Project.all, :id, :name, prompt: "Select a project" %>
+</div>
+```
+
+ต้องอัพเดท Controller ด้วย เพิ่มไปใน Strong Parameters
+
+```ruby
+params.expect(todo: [ :name, ..., :compelete, :priority, :project_id ])
+```
+
+`app/views/todos/_todo.html.erb`
+
+```erb
+<p>
+  ...
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= link_to todo.project.name, project_path(todo.project) %>
+</p>
+```
+
+เพิ่มโค้ดด้านล่างนี้ `app/view/projects/show.html.erb`
+
+```erb
+<ul>
+  <% @proejct.todos.each do |todo| %>
+    <li>
+      <%= link_to todo.name, todo_path(todo) %>
+      <% if todo.completed %>✅<% end %>
+    </li>
+  <% end %>
+</ul>
+```
+
+เชื่อมระหว่าง 2 tables (user กับ friend) เพื่อให้เราสามารถแยกเพื่อนของแต่ละ user ได้
 
 `app/models/friend.rb`
 
