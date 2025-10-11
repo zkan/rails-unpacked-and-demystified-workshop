@@ -81,6 +81,174 @@ end
 <%= link_to project.name, project_path(project) %>
 ```
 
+New
+
+```ruby
+get "/projects/new", to: "projects#new", as: "new_project"
+```
+
+ต้องมาก่อน Route ของ `show` ด้วย เพราะว่า Routes จะ Match ตาม Order จากบนลงล่าง
+
+เพิ่ม Action `new` ให้มีแค่ Initiation
+
+```ruby
+def new
+  @project = Project.new
+end
+```
+
+สร้างไฟล์ `new.html.erb`
+
+```erb
+<h1>New Project</h1>
+
+<%= form_with model: @project do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Project" %>
+  </div>
+<% end %>
+```
+
+```ruby
+def create
+  @project = Project.new(project_params)
+
+  if @project.save
+    redirect_to project_path(@project)
+  else
+    render :new
+  end
+end
+```
+
+เพื่อบอก Rails ให้มีแค่ `name` เท่านั้นที่ยอมให้ผ่าน
+
+```ruby
+def project_params
+  # params.require(:project).permit(:name)
+  params.expect(project: [ :name ])
+end
+```
+
+```ruby
+post "/projects", to: "projects#create"
+```
+
+เพิ่ม Validation
+
+```ruby
+class Project < ApplicationRecord
+  validates :name, presence: true
+  # validates :name, presence: { message: "Did you forget to add a name?" }
+end
+```
+
+เพิ่มโค้ดนี้ใน Form
+
+```erb
+  <% if @project.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+      <ul>
+        <% @project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+```
+
+```ruby
+render :new, status: :unprocessable_entity
+```
+
+```ruby
+get "/projects/:id/edit", to: "projects#edit", as: "edit_project"
+```
+
+```ruby
+def edit
+  @project = Project.find(params[:id])
+end
+```
+
+ไฟล์​ `edit.html.erb` ใช้เหมือน `new.html.erb` เลย
+
+```ruby
+patch "/projects/:id/edit", to: "projects#update"
+```
+
+```ruby
+def update
+  @project = Project.find(params[:id])
+
+  if @project.update(project_params)
+    redirect_to project_path(@project)
+  else
+    render :edit, status: unprocessable_entity
+  end
+end
+```
+
+ใช้ Partials
+
+เอา Form ทั้งหมดไปใช้ `_form.html.erb`
+
+ปรับไฟล์หลักให้เหลือ
+
+```erb
+<% render "form", project: @project %>
+```
+
+ส่ง `project` เข้าไป ดังนั้นใน `_form.html.erb` ให้ลบ `@` ออกด้วย
+
+Flash message
+
+```ruby
+if @project.save
+  flash[:notice] = "Project created successfully!"
+  ...
+```
+
+เพิ่มโค้ดด้านล่างนี้
+
+```erb
+<%= if flash[:notice] %>
+  <p class="flash"><%= flash[:notice] %></p>
+<% end %>
+```
+
+ไว้ที่ `application.html.erb`
+
+```ruby
+delete "/projects/:id", to: "projects#destroy"
+```
+
+```ruby
+def destroy
+  @project = Project.find(params[:id])
+
+  @project.destroy
+  flash[:notice] = "Project deleted."
+  redirect_to projects_path
+end
+```
+
+```erb
+<% button_to "Delete Project", project_path(@project), method: :delete %>
+```
+
+เปลี่ยน Routes ทั้ง 7 ให้เหลือแค่นี้ได้เลย
+
+```ruby
+resources :projects
+```
+
 ## MVC Pattern
 
 Controller
