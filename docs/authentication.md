@@ -21,3 +21,7 @@ rails g model Group name:string
 ```
 
 Logout
+
+## References
+
+* [Adding Authentication](https://guides.rubyonrails.org/getting_started.html#adding-authentication){target=_blank}
