@@ -57,6 +57,22 @@ rails db:migrate
 
 ให้ลองเข้าหน้า [http://127.0.0.1:3000](http://127.0.0.1:3000){target=_blank} ดู
 
+## Debugging with Rails Console
+
+สั่ง
+
+```bash
+rails console
+```
+
+หรือ
+
+```bash
+rails c
+```
+
+แล้วเราก็สามารถใช้ Methods ต่าง ๆ จาก Active Record ได้เลย สามารถดูรายละเอียดได้ที่ [Retrieving Objects from the Database](https://guides.rubyonrails.org/active_record_querying.html#retrieving-objects-from-the-database){target=_blank}
+
 ## References
 
 - [What is Scaffolding in Ruby on Rails?](https://www.rubyguides.com/2020/03/rails-scaffolding/){target=_blank}
