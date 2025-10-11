@@ -11,6 +11,9 @@
 
 ## Caching with Solid Cache
 
+### Referecens
+
+* [Caching Products](https://guides.rubyonrails.org/getting_started.html#caching-products){target=_blank}
 
 ## Managing Asynchronous Tasks with Solid Queue
 
